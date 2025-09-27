@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { apiError } from "../utils/apiError.js";
+import { ApiError } from "../utils/ApiError.js";
 import { Like } from "../models/like.model.js";
-import { apiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 const toggleVideoLike = asyncHandler(async (req, res) => {
     const { videoId } = req.params;
     const userId = req.user._id;
 
     if (!mongoose.isValidObjectId(videoId)) {
-        throw new apiError(400, "Invalid video ID");
+        throw new ApiError(400, "Invalid video ID");
     }
 
     const existingLike = await Like.findOne({
@@ -33,7 +33,7 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(
-            new apiResponse(200, likeStatus, "Like status toggled successfully")
+            new ApiResponse(200, likeStatus, "Like status toggled successfully")
         );
 });
 
@@ -49,7 +49,7 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
         return res
             .status(200)
             .json(
-                new apiResponse(
+                new ApiResponse(
                     200,
                     { isLiked: false },
                     "Comment like removed successfully"
@@ -63,7 +63,7 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
         return res
             .status(200)
             .json(
-                new apiResponse(
+                new ApiResponse(
                     200,
                     { isLiked: true },
                     "Comment liked successfully"
@@ -84,7 +84,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
         return res
             .status(200)
             .json(
-                new apiResponse(
+                new ApiResponse(
                     200,
                     { isLiked: false },
                     "Tweet like removed successfully"
@@ -98,7 +98,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
         return res
             .status(200)
             .json(
-                new apiResponse(
+                new ApiResponse(
                     200,
                     { isLiked: true },
                     "Tweet liked successfully"
@@ -113,11 +113,11 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
 //     const userId = req.user._id;
 
 //     if(!['video', 'comment', 'tweet'].includes(contentType)){
-//         throw new apiError(400, "Invalid content type");
+//         throw new ApiError(400, "Invalid content type");
 //     }
 
 //     if(!mongoose.isValidObjectId(contentId)){
-//         throw new apiError(400, "Invalid content ID");
+//         throw new ApiError(400, "Invalid content ID");
 //     }
 
 //     const conditions = { [contentType]: contentId, likedBy: userId };
@@ -134,7 +134,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
 //     }
 
 //     return res.status(200).json(
-//         new apiResponse(200, likeStatus, `${contentType.charAt(0).toUpperCase() + contentType.slice(1)} like status toggled successfully`)
+//         new ApiResponse(200, likeStatus, `${contentType.charAt(0).toUpperCase() + contentType.slice(1)} like status toggled successfully`)
 //     );
 // })
 
@@ -201,7 +201,7 @@ const getLikedVideos = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(
-            new apiResponse(
+            new ApiResponse(
                 200,
                 likedVideos,
                 "Liked videos fetched successfully"

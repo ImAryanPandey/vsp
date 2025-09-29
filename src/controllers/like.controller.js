@@ -107,7 +107,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
     }
 });
 
-// const toogleLike = asyncHandler(async (req, res) => {
+// const toggleLike = asyncHandler(async (req, res) => {
 //     const { contentId } = req.params;
 //     const { contentType } = req.body;
 //     const userId = req.user._id;

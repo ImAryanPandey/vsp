@@ -72,10 +72,10 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
     }
 });
 
-const toggleTweetLike = asyncHandler(async (req, res) => {
-    const { tweetId } = req.params;
+const togglepostLike = asyncHandler(async (req, res) => {
+    const { postId } = req.params;
     const existingLike = await Like.findOne({
-        tweet: tweetId,
+        Post: postId,
         likedBy: req.user._id,
     });
 
@@ -87,12 +87,12 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
                 new ApiResponse(
                     200,
                     { isLiked: false },
-                    "Tweet like removed successfully"
+                    "Post like removed successfully"
                 )
             );
     } else {
         await Like.create({
-            tweet: tweetId,
+            Post: postId,
             likedBy: req.user._id,
         });
         return res
@@ -101,7 +101,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
                 new ApiResponse(
                     200,
                     { isLiked: true },
-                    "Tweet liked successfully"
+                    "Post liked successfully"
                 )
             );
     }
@@ -112,7 +112,7 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
 //     const { contentType } = req.body;
 //     const userId = req.user._id;
 
-//     if(!['video', 'comment', 'tweet'].includes(contentType)){
+//     if(!['video', 'comment', 'Post'].includes(contentType)){
 //         throw new ApiError(400, "Invalid content type");
 //     }
 
@@ -209,4 +209,4 @@ const getLikedVideos = asyncHandler(async (req, res) => {
         );
 });
 
-export { toggleVideoLike, toggleCommentLike, toggleTweetLike, getLikedVideos };
+export { toggleVideoLike, toggleCommentLike, togglepostLike, getLikedVideos };

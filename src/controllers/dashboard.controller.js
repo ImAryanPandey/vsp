@@ -72,7 +72,7 @@ const getChannelVideos = asyncHandler(async (req, res) => {
         },
         {
             $project: {
-                thumbnail: 1,
+                thumbnailUrl: 1,
                 title: 1,
                 duration: 1,
                 views: 1,

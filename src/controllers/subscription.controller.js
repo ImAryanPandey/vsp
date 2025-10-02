@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 const toggleSubscription = asyncHandler(async (req, res) => {
-    const channelId = req.params;
+    const { channelId } = req.params;
     const subscriberId = req.user?._id;
 
     if (!mongoose.isValidObjectId(channelId)){

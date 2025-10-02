@@ -42,7 +42,7 @@ const updatePost = asyncHandler(async (req, res) => {
     const { postId } = req.params;
     const { content } = req.body;
 
-    if (!postId || !mongoose.isValidObjectId(postId)) {
+    if (!mongoose.isValidObjectId(postId)) {
         throw new ApiError(400, "Invalid post ID");
     }
 
@@ -77,7 +77,7 @@ const updatePost = asyncHandler(async (req, res) => {
 
 const deletePost = asyncHandler(async (req, res) => {
     const { postId } = req.params;
-    if (!postId || !mongoose.isValidObjectId(postId)) {
+    if (!mongoose.isValidObjectId(postId)) {
         throw new ApiError(400, "Invalid post ID");
     }
 

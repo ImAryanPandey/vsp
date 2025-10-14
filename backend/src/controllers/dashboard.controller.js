@@ -50,6 +50,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
 
 const getChannelVideos = asyncHandler(async (req, res) => {
     const userId = req.user._id;
+    const { page = 1, limit = 10 } = req.query;
 
     const videoAggregate = await Video.aggregate([
         {

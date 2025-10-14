@@ -10,7 +10,7 @@ const createPlaylist = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Name cannot be empty");
     }
 
-    if(!description || deescription.trim() === ""){
+    if(!description || description.trim() === ""){
         throw new ApiError(400, "Description cannot be empty");
     }
 
@@ -30,7 +30,7 @@ const createPlaylist = asyncHandler(async (req, res) => {
 });
 
 const getUserPlaylists = asyncHandler(async (req, res) => {
-    const { userId } = req.user._id;
+    const { userId } = req.params;
 
     if (!mongoose.isValidObjectId(userId)) {
         throw new ApiError(400, "Invalid user ID");
@@ -76,7 +76,7 @@ const getPlaylistById = asyncHandler(async (req, res) => {
 
 });
 
-const addVideoToPlayList = asyncHandler(async (req, res) => {
+const addVideoToPlaylist = asyncHandler(async (req, res) => {
     const { playlistId, videoId } = req.params;
 
     if (!mongoose.isValidObjectId(playlistId) || !mongoose.isValidObjectId(videoId)) {
@@ -193,4 +193,4 @@ const updatePlaylist = asyncHandler(async (req, res) => {
     );
 });
 
-export { createPlaylist, getUserPlaylists, getPlaylistById, addVideoToPlayList, removeVideoFromPlaylist, deletePlaylist, updatePlaylist };
+export { createPlaylist, getUserPlaylists, getPlaylistById, addVideoToPlaylist, removeVideoFromPlaylist, deletePlaylist, updatePlaylist };
